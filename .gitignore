@@ -1,0 +1,13 @@
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Build output
+*.shell-extension.zip
+dist/
+
+# Compiled schemas: generated locally / on install, never committed
+schemas/gschemas.compiled
+
+node_modules/

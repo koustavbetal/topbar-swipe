@@ -1,0 +1,5 @@
+.topbar-swipe {
+    background-gradient-start: rgba(80, 160, 255, 0);
+    background-gradient-end: rgba(80, 160, 255, 0.35);
+    background-gradient-direction: horizontal;
+}
