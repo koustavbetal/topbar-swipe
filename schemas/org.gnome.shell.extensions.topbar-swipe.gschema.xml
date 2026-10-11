@@ -38,41 +38,72 @@
   </key>
   <key name="default-stroke-count" type="i"><default>2</default><range min="1" max="10"/><summary>Fallback stroke count for apps with no rule</summary></key>
   <key name="default-cycle-count" type="i"><default>3</default><range min="1" max="20"/><summary>Fallback cycle count for apps with no rule</summary></key>
-  <key name="app-rules" type="s"><default>'[]'</default><summary>JSON array of per-app rules (appName, titleFilter, color, strokeCount, cycleCount, direction)</summary></key>
+  <key name="app-rules" type="s"><default>'[]'</default><summary>JSON array of notification rules (match, titleFilter, color, strokeCount, cycleCount, direction). 'match' is comma-separated text found in the app name or title; legacy 'appName' is read as 'match'.</summary></key>
+  <key name="recent-notification-apps" type="as"><default>[]</default><summary>App names of recent notification senders (names only, no titles or content), shown in Preferences to help write rules</summary></key>
+  <key name="test-trigger" type="s"><default>''</default><summary>Written by Preferences to preview a reaction; not a user setting</summary></key>
 
   <!-- ===== Device reactions ===== -->
   <key name="device-enabled" type="b"><default>false</default><summary>Master toggle for device-event reactions</summary></key>
 
-  <key name="power-react-enabled" type="b"><default>false</default><summary>React when charger is connected</summary></key>
+  <key name="power-react-enabled" type="b"><default>false</default><summary>React when the charger is connected</summary></key>
+  <key name="power-react-disconnect" type="b"><default>false</default><summary>React when the charger is disconnected</summary></key>
   <key name="power-color" type="s"><default>'#50c878'</default><summary>Power-connect color</summary></key>
-  <key name="power-direction" type="s">
-    <choices><choice value="ltr"/><choice value="rtl"/><choice value="center-out"/></choices>
-    <default>'ltr'</default>
-    <summary>Power-connect direction</summary>
-  </key>
   <key name="power-stroke-count" type="i"><default>1</default><range min="1" max="10"/><summary>Power-connect strokes per cycle</summary></key>
   <key name="power-cycle-count" type="i"><default>1</default><range min="1" max="20"/><summary>Power-connect cycles</summary></key>
 
   <key name="bt-react-enabled" type="b"><default>false</default><summary>React when a Bluetooth device connects</summary></key>
+  <key name="bt-react-disconnect" type="b"><default>false</default><summary>React (center-out) when a Bluetooth device disconnects</summary></key>
   <key name="bt-color" type="s"><default>'#4aa3ff'</default><summary>Bluetooth-connect color</summary></key>
-  <key name="bt-direction" type="s">
-    <choices><choice value="ltr"/><choice value="rtl"/><choice value="center-out"/></choices>
-    <default>'ltr'</default>
-    <summary>Bluetooth-connect direction</summary>
-  </key>
   <key name="bt-stroke-count" type="i"><default>1</default><range min="1" max="10"/><summary>Bluetooth-connect strokes per cycle</summary></key>
   <key name="bt-cycle-count" type="i"><default>1</default><range min="1" max="20"/><summary>Bluetooth-connect cycles</summary></key>
   <key name="bt-name-filter" type="s"><default>''</default><summary>Optional substring filter on device name/alias</summary></key>
+
+  <!-- ===== Battery bar (solid fill to battery level, swipes in the rest) ===== -->
+  <key name="battery-fill-power" type="b"><default>true</default><summary>Show the battery bar when the charger connects</summary></key>
+  <key name="battery-fill-bt" type="b"><default>true</default><summary>Show the device's battery bar when a Bluetooth device connects (if it reports one)</summary></key>
+  <key name="battery-text-format" type="s"><default>'{name}  {percent}%'</default><summary>Battery bar text; {percent} and {name} (Bluetooth device name, empty for the charger) are filled in</summary></key>
+  <key name="battery-text-font" type="s"><default>''</default><summary>Battery bar text font as a Pango description (family, weight, size), e.g. 'Cantarell Bold 11'; empty = the top bar's font, bold</summary></key>
+  <key name="battery-text-color" type="s"><default>'#ffffff'</default><summary>Battery bar text color</summary></key>
+  <key name="battery-show-percent" type="b"><default>true</default><summary>Show the battery percentage (bold) next to the left section of the top bar</summary></key>
+  <key name="battery-fill-fade" type="i"><default>80</default><range min="0" max="600"/><summary>Length of the soft fade past the battery level in px (0 = hard edge)</summary></key>
+  <key name="battery-low-threshold" type="i"><default>20</default><range min="1" max="99"/><summary>Below this percentage the low color is used</summary></key>
+  <key name="battery-mid-threshold" type="i"><default>50</default><range min="1" max="100"/><summary>Below this percentage (and above low) the mid color is used</summary></key>
+  <key name="battery-low-color" type="s"><default>'#e5484d'</default><summary>Battery bar color when low</summary></key>
+  <key name="battery-alerts-enabled" type="b"><default>false</default><summary>Play the battery bar when the laptop battery crosses the alert levels (event-driven, no polling)</summary></key>
+  <key name="battery-alert-low" type="i"><default>20</default><range min="0" max="100"/><summary>Alert when the battery drops below this percentage on battery; 0 = off</summary></key>
+  <key name="battery-alert-high" type="i"><default>90</default><range min="0" max="100"/><summary>Alert when the battery reaches this percentage while charging; 0 = off</summary></key>
+  <key name="battery-mid-color" type="s"><default>'#f5c518'</default><summary>Battery bar color when medium (above medium, the charger or Bluetooth color is used)</summary></key>
 
   <!-- ===== Advanced / API ===== -->
   <key name="api-enabled" type="b"><default>false</default><summary>Master toggle for the trigger button / API surface</summary></key>
   <key name="trigger-button-position" type="s">
     <choices><choice value="left"/><choice value="center"/><choice value="right"/><choice value="key"/></choices>
     <default>'right'</default>
-    <summary>Where the trigger button lives, or 'key' for a keybinding instead</summary>
+    <summary>Where the trigger button sits and its menu opens ('key' is the legacy hidden value, read as hidden + center)</summary>
   </key>
-  <key name="trigger-button-key" type="as"><default>[]</default><summary>Keybinding accelerator, used when position is 'key'</summary></key>
-  <key name="quick-scripts" type="s"><default>'[]'</default><summary>JSON array of {name, command} shown under the trigger button</summary></key>
+  <key name="trigger-button-hidden" type="b"><default>false</default><summary>Hide the trigger button; the shortcut opens its menu at the chosen position</summary></key>
+  <key name="trigger-button-icon" type="s"><default>'preferences-desktop-keyboard-shortcuts-symbolic'</default><summary>Icon name (or absolute file path) for the trigger button</summary></key>
+  <key name="trigger-button-key" type="as"><default>[]</default><summary>Keyboard shortcut that opens the trigger menu</summary></key>
+  <key name="quick-scripts" type="s"><default>'[]'</default><summary>JSON array of {name, command, icon} shown under the trigger button</summary></key>
+  <key name="menu-show-icon" type="b"><default>true</default><summary>Show each script's icon in the menu</summary></key>
+  <key name="menu-show-name" type="b"><default>true</default><summary>Show each script's name in the menu</summary></key>
+  <key name="menu-show-run" type="b"><default>false</default><summary>Show a run arrow on each script in the menu</summary></key>
+  <key name="menu-clock-enabled" type="b"><default>true</default><summary>Show the date and time at the top of the menu</summary></key>
+  <key name="menu-clock-time-format" type="s"><default>'%H:%M'</default><summary>Menu clock, large top line (GLib.DateTime format; empty hides it)</summary></key>
+  <key name="menu-clock-date-format" type="s"><default>'%A, %d %B'</default><summary>Menu clock, smaller second line (GLib.DateTime format; empty hides it)</summary></key>
+
+  <!-- ===== Schedule tab ===== -->
+  <key name="timed-scripts" type="s"><default>'[]'</default><summary>JSON array of {script (saved script name), mode: ''|'every'|'daily', minutes (interval, hours*60+minutes), hour, minute, enabled}; '' = not set up yet</summary></key>
+
+  <!-- ===== Script output on the top bar ===== -->
+  <key name="output-panel-enabled" type="b"><default>true</default><summary>Show script output as text on the top bar</summary></key>
+  <key name="output-panel-position" type="s">
+    <choices><choice value="left"/><choice value="center"/><choice value="right"/></choices>
+    <default>'left'</default>
+    <summary>Top bar section for the output text</summary>
+  </key>
+  <key name="output-panel-loops" type="i"><default>2</default><range min="0" max="50"/><summary>How many times the output scrolls through before hiding (text that fits stays 3 s per loop); 0 keeps it until clicked</summary></key>
+  <key name="output-panel-max-width" type="i"><default>400</default><range min="80" max="2000"/><summary>Maximum width of the output text in px</summary></key>
 
     <!-- ===== Quick-script output label ===== -->
   <key name="output-label-font" type="s">
@@ -93,7 +124,11 @@
 
   <key name="output-label-debug" type="b">
     <default>false</default>
-    <summary>Show hard-coded output debug text</summary>
+    <summary>Show the preview text instead of running scripts</summary>
+  </key>
+  <key name="output-preview-text" type="s">
+    <default>'Your output will appear here!!'</default>
+    <summary>Text shown while previewing the output</summary>
   </key>
 
 

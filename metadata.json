@@ -5,5 +5,5 @@
   "shell-version": ["45", "46", "47"],
   "settings-schema": "org.gnome.shell.extensions.topbar-swipe",
   "url": "https://github.com/koustavbetal/topbar-swipe",
-  "version-name": "1.0"
+  "version-name": "1.8"
 }
