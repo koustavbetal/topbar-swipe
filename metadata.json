@@ -1,9 +1,9 @@
 {
   "uuid": "topbar-swipe@koustavbetal.github.io",
   "name": "Top Bar Swipe",
-  "description": "Animated, colored swipe bars across the top panel that react to notifications, charger and Bluetooth events, or run as a calm ambient loop.\n\nPer-app colors, directions and stroke counts are configurable in Preferences. Notification rules match only the app name and title, never the message body.\n\nOptional (off by default): a panel button or keyboard shortcut that runs shell commands you configure yourself in Preferences and shows their output. No commands are run unless you add them.",
+  "description": "Animated, colored swipe bars across the top panel that react to notifications, charger and Bluetooth events, or run as a calm ambient loop.\n\nPer-app colors, directions and stroke counts are configurable in Preferences. Notification rules match only the app name and title, never the message body.\n\nA panel button (or keyboard shortcut) runs shell commands you configure yourself in Preferences and shows their output. It comes with one harmless example (whoami), commands only run when you click them, and the button can be hidden or turned off.",
   "shell-version": ["45", "46", "47"],
   "settings-schema": "org.gnome.shell.extensions.topbar-swipe",
   "url": "https://github.com/koustavbetal/topbar-swipe",
-  "version-name": "1.8"
+  "version-name": "1.0.0"
 }

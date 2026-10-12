@@ -3,13 +3,13 @@
 <schema id="org.gnome.shell.extensions.topbar-swipe" path="/org/gnome/shell/extensions/topbar-swipe/">
 
   <!-- ===== Shared appearance ===== -->
-  <key name="swipe-opacity" type="d"><default>0.35</default><range min="0.05" max="1.0"/><summary>Bar max opacity</summary></key>
-  <key name="swipe-radius" type="i"><default>0</default><range min="0" max="200"/><summary>Bar border radius in px</summary></key>
+  <key name="swipe-opacity" type="d"><default>0.6</default><range min="0.05" max="1.0"/><summary>Bar max opacity</summary></key>
+  <key name="swipe-radius" type="i"><default>10</default><range min="0" max="200"/><summary>Bar border radius in px</summary></key>
 
   <!-- ===== Shared timing — ONE style per direction family, used by ==== -->
   <!-- ===== ambient, notifications, and device reactions alike.       ==== -->
-  <key name="swipe-lr-width" type="i"><default>200</default><range min="20" max="2000"/><summary>Side (LTR/RTL) stroke length</summary></key>
-  <key name="swipe-lr-duration" type="i"><default>800</default><range min="100" max="10000"/><summary>Side (LTR/RTL) stroke duration</summary></key>
+  <key name="swipe-lr-width" type="i"><default>300</default><range min="20" max="2000"/><summary>Side (LTR/RTL) stroke length</summary></key>
+  <key name="swipe-lr-duration" type="i"><default>1200</default><range min="100" max="10000"/><summary>Side (LTR/RTL) stroke duration</summary></key>
   <key name="swipe-lr-stroke-gap" type="i"><default>150</default><range min="0" max="5000"/><summary>Side (LTR/RTL) gap between strokes</summary></key>
   <key name="swipe-lr-cycle-gap" type="i"><default>500</default><range min="0" max="60000"/><summary>Side (LTR/RTL) gap between cycles / idle interval</summary></key>
 
@@ -25,7 +25,7 @@
     <default>'ltr'</default>
     <summary>Ambient direction</summary>
   </key>
-  <key name="idle-loop-enabled" type="b"><default>true</default><summary>Run ambient swipe loop</summary></key>
+  <key name="idle-loop-enabled" type="b"><default>false</default><summary>Run ambient swipe loop</summary></key>
   <key name="ambient-stroke-count" type="i"><default>1</default><range min="1" max="10"/><summary>Ambient strokes per cycle</summary></key>
 
   <!-- ===== Notifications ===== -->
@@ -40,6 +40,7 @@
   <key name="default-cycle-count" type="i"><default>3</default><range min="1" max="20"/><summary>Fallback cycle count for apps with no rule</summary></key>
   <key name="app-rules" type="s"><default>'[]'</default><summary>JSON array of notification rules (match, titleFilter, color, strokeCount, cycleCount, direction). 'match' is comma-separated text found in the app name or title; legacy 'appName' is read as 'match'.</summary></key>
   <key name="recent-notification-apps" type="as"><default>[]</default><summary>App names of recent notification senders (names only, no titles or content), shown in Preferences to help write rules</summary></key>
+  <key name="welcome-shown" type="b"><default>false</default><summary>The one-time welcome swipe has been played; not a user setting</summary></key>
   <key name="test-trigger" type="s"><default>''</default><summary>Written by Preferences to preview a reaction; not a user setting</summary></key>
 
   <!-- ===== Device reactions ===== -->
@@ -75,19 +76,19 @@
   <key name="battery-mid-color" type="s"><default>'#f5c518'</default><summary>Battery bar color when medium (above medium, the charger or Bluetooth color is used)</summary></key>
 
   <!-- ===== Advanced / API ===== -->
-  <key name="api-enabled" type="b"><default>false</default><summary>Master toggle for the trigger button / API surface</summary></key>
+  <key name="api-enabled" type="b"><default>true</default><summary>Master toggle for the trigger button / API surface</summary></key>
   <key name="trigger-button-position" type="s">
     <choices><choice value="left"/><choice value="center"/><choice value="right"/><choice value="key"/></choices>
-    <default>'right'</default>
+    <default>'left'</default>
     <summary>Where the trigger button sits and its menu opens ('key' is the legacy hidden value, read as hidden + center)</summary>
   </key>
   <key name="trigger-button-hidden" type="b"><default>false</default><summary>Hide the trigger button; the shortcut opens its menu at the chosen position</summary></key>
-  <key name="trigger-button-icon" type="s"><default>'preferences-desktop-keyboard-shortcuts-symbolic'</default><summary>Icon name (or absolute file path) for the trigger button</summary></key>
+  <key name="trigger-button-icon" type="s"><default>'topbar-swipe-symbolic'</default><summary>Icon name (or absolute file path) for the trigger button</summary></key>
   <key name="trigger-button-key" type="as"><default>[]</default><summary>Keyboard shortcut that opens the trigger menu</summary></key>
-  <key name="quick-scripts" type="s"><default>'[]'</default><summary>JSON array of {name, command, icon} shown under the trigger button</summary></key>
+  <key name="quick-scripts" type="s"><default>'[{"name": "User", "command": "whoami", "icon": "avatar-default-symbolic"}]'</default><summary>JSON array of {name, command, icon} shown under the trigger button; ships with one harmless example (whoami)</summary></key>
   <key name="menu-show-icon" type="b"><default>true</default><summary>Show each script's icon in the menu</summary></key>
   <key name="menu-show-name" type="b"><default>true</default><summary>Show each script's name in the menu</summary></key>
-  <key name="menu-show-run" type="b"><default>false</default><summary>Show a run arrow on each script in the menu</summary></key>
+  <key name="menu-show-run" type="b"><default>true</default><summary>Show a run arrow on each script in the menu</summary></key>
   <key name="menu-clock-enabled" type="b"><default>true</default><summary>Show the date and time at the top of the menu</summary></key>
   <key name="menu-clock-time-format" type="s"><default>'%H:%M'</default><summary>Menu clock, large top line (GLib.DateTime format; empty hides it)</summary></key>
   <key name="menu-clock-date-format" type="s"><default>'%A, %d %B'</default><summary>Menu clock, smaller second line (GLib.DateTime format; empty hides it)</summary></key>

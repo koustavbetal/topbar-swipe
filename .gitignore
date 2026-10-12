@@ -1,13 +1,39 @@
-# Editor
-.vscode/
-.idea/
-*.swp
+# Top Bar Swipe: things that never belong in the repo.
+# Everything that ships is listed in the Makefile (SOURCES, DIRS, schemas).
 
-# Build output
+# ---- Build output ----
+# `make pack` / `make install`
 *.shell-extension.zip
 dist/
 
-# Compiled schemas: generated locally / on install, never committed
+# Compiled GSettings schemas: built locally by `make schemas`,
+# and by GNOME on install. extensions.gnome.org rejects them for 45+.
 schemas/gschemas.compiled
 
+# ---- Tooling ----
 node_modules/
+.eslintcache
+npm-debug.log*
+
+# ---- Editors and IDEs ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# ---- OS clutter ----
+.DS_Store
+Thumbs.db
+.directory
+.Trash-*
+
+# ---- Merges and patches ----
+*.orig
+*.rej
+
+# ---- Local-only notes and secrets ----
+.env
+*.local
